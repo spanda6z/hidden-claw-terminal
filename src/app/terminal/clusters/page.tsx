@@ -1,7 +1,6 @@
 "use client";
-import { TICKER_CLUSTERS } from "@/lib/mock-data";
 export default function ClustersPage() {
-  const claw = TICKER_CLUSTERS[0];
+  const claw = { ticker: "$CLAW" };
   return (
     <div className="p-5 space-y-4">
       <div className="flex items-center justify-between">

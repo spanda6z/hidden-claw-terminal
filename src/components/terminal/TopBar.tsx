@@ -1,9 +1,16 @@
 "use client";
 
-import { SYSTEM_STATUS } from "@/lib/mock-data";
-
 export function TopBar() {
-  const s = SYSTEM_STATUS;
+  const s = {
+    solPrice: 182.41,
+    network: "MAINNET-BETA [SIM]",
+    rpcMs: 38,
+    slot: 312984221,
+    tokens: 1284,
+    eliteActive: 47,
+    system: "ONLINE",
+    time: "13:04:31",
+  };
   return (
     <header className="bg-[var(--bg-elevated)] border-b border-[var(--border)] flex items-center px-4 gap-6 text-[11px] mono h-full">
       <div className="flex items-center gap-1.5"><span className="text-[var(--text-dim)]">SOL</span><span className="text-[var(--text)] font-medium">${s.solPrice.toFixed(2)}</span></div>
@@ -14,10 +21,6 @@ export function TopBar() {
       <div className="flex items-center gap-1.5"><span className="text-[var(--text-dim)]">ELITE</span><span className="text-[var(--green)]">{s.eliteActive} ACTIVE</span></div>
       <div className="flex items-center gap-1.5"><span className="text-[var(--text-dim)]">SYSTEM</span><span className="text-[var(--green)]">{s.system}</span></div>
       <div className="ml-auto flex items-center gap-4">
-        <button className="flex items-center gap-2 text-[var(--text-muted)] hover:text-[var(--text)] text-[11px] border border-[var(--border)] rounded px-2.5 py-1" onClick={() => { window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", metaKey: true, bubbles: true })); }}>
-          <span className="text-[var(--text-dim)]">Search</span>
-          <span className="text-[10px] text-[var(--text-dim)]">⌘K</span>
-        </button>
         <span className="text-[var(--text-dim)]">{s.time}</span>
         <span className="sim-badge">SIM</span>
       </div>
