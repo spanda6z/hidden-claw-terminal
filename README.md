@@ -4,17 +4,17 @@
 
 > THE MARKET LEAVES FOOTPRINTS. WE FOLLOW THEM.
 
-This is a **high-fidelity interactive simulation mockup**.  
-No real Solana connections. No wallets. No transactions. All data is demo/simulated.
+High-fidelity interactive **simulation mockup**.  
+No real Solana connections. No wallets. No transactions. Demo data only.
 
-## Run locally
+## Run
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open http://localhost:3000
 
 ## Flow
 
@@ -22,7 +22,7 @@ Open [http://localhost:3000](http://localhost:3000).
 / → /risk → /terms → /access → /terminal
 ```
 
-## Terminal modules
+## Terminal
 
 Overview · Live Feed · Launches · Smart Money · Wallets · Developers  
 Token Scanner · Social Intel · Ticker Clusters · Bonding Curves  
@@ -30,6 +30,6 @@ Watchlist · Execution · Settings
 
 **⌘K** — Command palette
 
-## License
+## Deploy
 
-Private / simulation only.
+Import this repo on [Vercel](https://vercel.com/new) as a Next.js project.
