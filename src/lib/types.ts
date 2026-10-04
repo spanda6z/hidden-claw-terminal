@@ -1,3 +1,5 @@
+// HIDDEN CLAW — Core types (simulation only)
+
 export type WalletTier = "ELITE" | "SHARP" | "WATCH" | "MEH" | "DUMPER";
 export type DeveloperTier = "PROVEN" | "WATCH" | "RISKY" | "BLACKLISTED";
 export type SecurityStatus = "PASS" | "WARNING" | "FAIL" | "UNKNOWN";
