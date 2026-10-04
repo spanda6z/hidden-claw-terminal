@@ -8,6 +8,7 @@ const NAV = [
   { href: "/terminal", label: "OVERVIEW" },
   { href: "/terminal/feed", label: "LIVE FEED" },
   { href: "/terminal/launches", label: "LAUNCHES" },
+  { href: "/terminal/pumpfun", label: "PUMP.FUN" },
   { href: "/terminal/smart-money", label: "SMART MONEY" },
   { href: "/terminal/wallets", label: "WALLETS" },
   { href: "/terminal/developers", label: "DEVELOPERS" },
