@@ -6,17 +6,17 @@ import { cn } from "@/lib/utils";
 import { clearSession } from "@/lib/auth";
 
 const NAV = [
-  { href: "/terminal", label: "Overview" },
-  { href: "/terminal/scanner", label: "Scanner" },
-  { href: "/terminal/detection", label: "Detection" },
-  { href: "/terminal/pumpfun", label: "Pump.fun" },
-  { href: "/terminal/smart-money", label: "Smart Wallets" },
-  { href: "/terminal/top-wallets", label: "Top Wallets" },
-  { href: "/terminal/developers", label: "Dev Reputation" },
-  { href: "/terminal/investigation", label: "Investigate" },
-  { href: "/terminal/alerts", label: "Alerts" },
-  { href: "/terminal/execution", label: "Execution" },
-  { href: "/terminal/settings", label: "Settings" },
+  { href: "/terminal", label: "Overview", icon: "\u25C6" },
+  { href: "/terminal/scanner", label: "Scanner", icon: "\u25CE" },
+  { href: "/terminal/detection", label: "Detection", icon: "\u26A1" },
+  { href: "/terminal/pumpfun", label: "Pump.fun", icon: "\u25C9" },
+  { href: "/terminal/smart-money", label: "Smart Wallets", icon: "\u25C7" },
+  { href: "/terminal/top-wallets", label: "Top Wallets", icon: "\u25A3" },
+  { href: "/terminal/developers", label: "Dev Reputation", icon: "\u25C8" },
+  { href: "/terminal/investigation", label: "Investigate", icon: "\u2315" },
+  { href: "/terminal/alerts", label: "Alerts", icon: "\u2691" },
+  { href: "/terminal/execution", label: "Execution", icon: "\u25B7" },
+  { href: "/terminal/settings", label: "Settings", icon: "\u2699" },
 ];
 
 export function Sidebar() {
@@ -26,36 +26,35 @@ export function Sidebar() {
     clearSession();
     router.replace("/signup");
   }
-
   return (
-    <aside className="bg-[var(--bg-elevated)] border-r border-[var(--border)] flex flex-col h-full">
+    <aside className="bg-[var(--bg-elevated)] border-r border-[var(--border)] flex flex-col h-full select-none">
       <div className="px-4 py-4 border-b border-[var(--border)]">
-        <Link href="/" className="flex items-center gap-2.5">
-          <span className="w-6 h-6 rounded-md border border-[var(--cyan)]/40 flex items-center justify-center">
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <span className="w-7 h-7 rounded-md border border-[var(--cyan)]/40 flex items-center justify-center bg-[var(--cyan-dim)]">
             <span className="w-2 h-2 rounded-sm bg-[var(--cyan)]" />
           </span>
           <div>
-            <div className="text-[12px] font-semibold tracking-[0.1em]">HIDDEN CLAW</div>
-            <div className="text-[9px] text-[var(--text-dim)] tracking-wider">INTELLIGENCE</div>
+            <div className="text-[12px] font-bold tracking-[0.12em] group-hover:text-[var(--cyan)] transition-colors">HIDDEN CLAW</div>
+            <div className="text-[9px] text-[var(--text-dim)] tracking-[0.14em] font-medium">INTELLIGENCE</div>
           </div>
         </Link>
       </div>
-      <nav className="flex-1 py-3 overflow-y-auto px-2">
+      <nav className="flex-1 py-3 overflow-y-auto px-2 space-y-0.5">
         {NAV.map((item) => {
           const active = item.href === "/terminal" ? pathname === "/terminal" : pathname.startsWith(item.href);
           return (
-            <Link key={item.href} href={item.href} className={cn("block px-3 py-2 text-[12px] font-medium rounded-md transition-colors mb-0.5", active ? "bg-[var(--cyan-dim)] text-[var(--cyan)]" : "text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--bg-hover)]")}>
-              {item.label}
+            <Link key={item.href} href={item.href} className={cn("nav-item", active && "active")}>
+              <span className="text-[11px] opacity-70 w-4 text-center">{item.icon}</span>
+              <span>{item.label}</span>
+              {active && <span className="ml-auto text-[var(--cyan)] text-[10px]">\u203A</span>}
             </Link>
           );
         })}
       </nav>
       <div className="px-4 py-3 border-t border-[var(--border)] space-y-2">
-        <div className="text-[10px] text-[var(--text-dim)] leading-relaxed">Understand first.<br />Decide second.</div>
-        <span className="live-badge">LIVE SIGNALS</span>
-        <button type="button" onClick={signOut} className="block text-[10px] text-[var(--text-dim)] hover:text-[var(--text)] tracking-wider mt-1">
-          Sign out
-        </button>
+        <div className="text-[10px] text-[var(--text-dim)] leading-relaxed font-medium">Understand first.<br />Decide second.</div>
+        <div className="flex items-center gap-2"><span className="live-badge">LIVE</span><span className="badge badge-cyan">PAID</span></div>
+        <button type="button" onClick={signOut} className="text-[10px] text-[var(--text-dim)] hover:text-[var(--text)] tracking-wider">Sign out \u2192</button>
       </div>
     </aside>
   );

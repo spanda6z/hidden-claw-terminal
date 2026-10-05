@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getSession } from "@/lib/auth";
+import { getSession, hasPaidAccess } from "@/lib/auth";
 
 export function AuthGate({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -14,16 +14,19 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
       router.replace("/signup");
       return;
     }
+    if (!hasPaidAccess()) {
+      router.replace("/pay");
+      return;
+    }
     setReady(true);
   }, [router]);
 
   if (!ready) {
     return (
       <div className="h-screen flex items-center justify-center bg-[var(--bg-deep)]">
-        <div className="text-[12px] tracking-wider text-[var(--text-dim)]">Verifying access\u2026</div>
+        <div className="text-[12px] tracking-wider text-[var(--text-dim)] mono">Verifying access\u2026</div>
       </div>
     );
   }
-
   return <>{children}</>;
 }
