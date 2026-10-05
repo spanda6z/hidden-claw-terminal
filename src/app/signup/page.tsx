@@ -56,14 +56,16 @@ export default function SignupPage() {
     <div className="min-h-screen flex flex-col">
       <header className="px-8 py-4 border-b border-[var(--border)] flex items-center justify-between">
         <Link href="/" className="text-[12px] font-semibold tracking-[0.14em]">HIDDEN CLAW</Link>
-        <span className="badge badge-amber">ACCOUNT REQUIRED</span>
+        <span className="badge badge-cyan">ACCOUNT REQUIRED</span>
       </header>
       <main className="flex-1 flex items-center justify-center px-6 py-16">
         <div className="w-full max-w-md">
           <div className="label mb-3">{mode === "signup" ? "CREATE ACCOUNT" : "RETURN ACCESS"}</div>
-          <h1 className="h-title text-2xl mb-2">{mode === "signup" ? "Sign up to continue" : "Sign in to continue"}</h1>
+          <h1 className="h-title text-2xl mb-2">{mode === "signup" ? "Sign up, then request access" : "Sign in to continue"}</h1>
           <p className="text-[13px] text-[var(--text-muted)] mb-8 leading-relaxed">
-            Create an account, then complete the one-time <span className="mono text-[var(--text)]">3 SOL</span> access fee to enter the terminal.
+            HIDDEN CLAW is private. Create an account, then DM{" "}
+            <a href="https://x.com/chainpulseoffi?s=11" target="_blank" rel="noopener noreferrer" className="text-[var(--cyan)] hover:underline">@chainpulseoffi</a>{" "}
+            on X for terminal access.
           </p>
           <form onSubmit={handleSubmit} className="space-y-4 card p-6">
             {mode === "signup" && (
