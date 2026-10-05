@@ -17,33 +17,39 @@ export default function TermsPage() {
   const router = useRouter();
   const allChecked = checked.every(Boolean);
 
-  function toggle(i: number) {
-    setChecked((prev) => prev.map((v, idx) => (idx === i ? !v : v)));
-  }
-
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="px-8 py-4 border-b border-[var(--border)] flex items-center gap-3">
+    <div className="min-h-screen">
+      <header className="px-8 py-4 border-b border-[var(--border)] flex items-center justify-between">
         <Link href="/" className="text-[12px] font-semibold tracking-[0.14em]">HIDDEN CLAW</Link>
-        <span className="text-[10px] text-[var(--text-dim)] tracking-wider">PRIVATE SYSTEM ACCESS</span>
       </header>
-      <main className="flex-1 flex items-center justify-center px-6 py-16">
-        <div className="w-full max-w-md">
-          <h1 className="text-lg font-semibold tracking-wide mb-2">PRIVATE SYSTEM ACCESS</h1>
-          <p className="text-[13px] text-[var(--text-muted)] mb-8">Accept the following before entering the intelligence terminal.</p>
-          <div className="space-y-3 mb-8">
-            {CHECKS.map((label, i) => (
-              <label key={i} className="flex items-start gap-3 cursor-pointer text-[13px] text-[var(--text-muted)] hover:text-[var(--text)]">
-                <input type="checkbox" checked={checked[i]} onChange={() => toggle(i)} className="mt-0.5 accent-[var(--cyan)]" />
-                <span>{label}</span>
-              </label>
-            ))}
-          </div>
-          <button disabled={!allChecked} onClick={() => router.push("/access")} className={`w-full py-3 text-[12px] font-semibold tracking-wider transition-opacity ${allChecked ? "bg-[var(--cyan)] text-black hover:opacity-90" : "bg-[var(--border)] text-[var(--text-dim)] cursor-not-allowed"}`}>
-            VERIFY ACCESS
-          </button>
-          <p className="text-[11px] text-[var(--text-dim)] mt-4 text-center">Simulation environment · No real transactions</p>
+      <main className="max-w-lg mx-auto px-8 py-16">
+        <div className="text-[10px] tracking-[0.2em] text-[var(--cyan)] mb-3">TERMS</div>
+        <h1 className="text-2xl font-semibold mb-4">Accept before creating access</h1>
+        <p className="text-[13px] text-[var(--text-muted)] mb-8">Accept the following before creating access to the intelligence terminal.</p>
+        <div className="space-y-3 mb-8">
+          {CHECKS.map((c, i) => (
+            <label key={i} className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={checked[i]}
+                onChange={(e) => {
+                  const next = [...checked];
+                  next[i] = e.target.checked;
+                  setChecked(next);
+                }}
+                className="mt-1"
+              />
+              <span className="text-[13px] text-[var(--text-muted)]">{c}</span>
+            </label>
+          ))}
         </div>
+        <button
+          disabled={!allChecked}
+          onClick={() => router.push("/signup")}
+          className="bg-[var(--cyan)] text-[var(--bg-deep)] text-[12px] font-semibold tracking-wider px-6 py-3 rounded-md disabled:opacity-40 hover:opacity-90"
+        >
+          CONTINUE TO SIGN UP \u2192
+        </button>
       </main>
     </div>
   );

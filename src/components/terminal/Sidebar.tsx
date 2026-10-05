@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { clearSession } from "@/lib/auth";
 
 const NAV = [
   { href: "/terminal", label: "Overview" },
@@ -20,6 +21,12 @@ const NAV = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  function signOut() {
+    clearSession();
+    router.replace("/signup");
+  }
+
   return (
     <aside className="bg-[var(--bg-elevated)] border-r border-[var(--border)] flex flex-col h-full">
       <div className="px-4 py-4 border-b border-[var(--border)]">
@@ -43,9 +50,12 @@ export function Sidebar() {
           );
         })}
       </nav>
-      <div className="px-4 py-3 border-t border-[var(--border)] space-y-1">
+      <div className="px-4 py-3 border-t border-[var(--border)] space-y-2">
         <div className="text-[10px] text-[var(--text-dim)] leading-relaxed">Understand first.<br />Decide second.</div>
         <span className="live-badge">LIVE SIGNALS</span>
+        <button type="button" onClick={signOut} className="block text-[10px] text-[var(--text-dim)] hover:text-[var(--text)] tracking-wider mt-1">
+          Sign out
+        </button>
       </div>
     </aside>
   );
