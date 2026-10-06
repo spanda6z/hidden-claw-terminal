@@ -3,16 +3,17 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { clearSession } from "@/lib/auth";
 
 const NAV = [
   { href: "/terminal", label: "Overview", icon: "\u25C6" },
   { href: "/terminal/scanner", label: "Scanner", icon: "\u25CE" },
-  { href: "/terminal/detection", label: "Detection", icon: "\u26A1" },
+  { href: "/terminal/launches", label: "Launches", icon: "\u25C7" },
   { href: "/terminal/pumpfun", label: "Pump.fun", icon: "\u25C9" },
-  { href: "/terminal/smart-money", label: "Smart Wallets", icon: "\u25C7" },
-  { href: "/terminal/top-wallets", label: "Top Wallets", icon: "\u25A3" },
-  { href: "/terminal/developers", label: "Dev Reputation", icon: "\u25C8" },
+  { href: "/terminal/feed", label: "Live feed", icon: "\u25A3" },
+  { href: "/terminal/curves", label: "Curves", icon: "\u25D0" },
+  { href: "/terminal/detection", label: "Detection", icon: "\u26A1" },
+  { href: "/terminal/developers", label: "Dev reputation", icon: "\u25C8" },
+  { href: "/terminal/smart-money", label: "Smart wallets", icon: "\u25C7" },
   { href: "/terminal/investigation", label: "Investigate", icon: "\u2315" },
   { href: "/terminal/alerts", label: "Alerts", icon: "\u2691" },
   { href: "/terminal/execution", label: "Execution", icon: "\u25B7" },
@@ -22,10 +23,7 @@ const NAV = [
 export function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
-  function signOut() {
-    clearSession();
-    router.replace("/signup");
-  }
+
   return (
     <aside className="bg-[var(--bg-elevated)] border-r border-[var(--border)] flex flex-col h-full select-none">
       <div className="px-4 py-4 border-b border-[var(--border)]">
@@ -53,8 +51,8 @@ export function Sidebar() {
       </nav>
       <div className="px-4 py-3 border-t border-[var(--border)] space-y-2">
         <div className="text-[10px] text-[var(--text-dim)] leading-relaxed font-medium">Understand first.<br />Decide second.</div>
-        <div className="flex items-center gap-2"><span className="live-badge">LIVE</span><span className="badge badge-cyan">PAID</span></div>
-        <button type="button" onClick={signOut} className="text-[10px] text-[var(--text-dim)] hover:text-[var(--text)] tracking-wider">Sign out \u2192</button>
+        <span className="live-badge">LIVE DATA</span>
+        <button type="button" onClick={() => router.push("/")} className="block text-[10px] text-[var(--text-dim)] hover:text-[var(--text)] tracking-wider">Exit \u2192</button>
       </div>
     </aside>
   );
