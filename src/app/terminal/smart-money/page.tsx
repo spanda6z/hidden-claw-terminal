@@ -1,46 +1,65 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { formatUsd } from "@/lib/signals";
 import Link from "next/link";
 
-const WALLETS = [
-  { address: "7F3A\u20269k2p", label: "Tracked behavior", launches: 14, earlyEntries: 12, pattern: "Frequently appears before volume expansion on new launches.", activity: "Active", evidence: ["Early entry timing", "Repeated participation", "Exit consistency tracked"] },
-  { address: "91AB\u20263m7x", label: "Tracked behavior", launches: 9, earlyEntries: 7, pattern: "Often present in first minutes; selective token set.", activity: "Active", evidence: ["Sub-60s entries", "Limited token frequency", "Historical timing"] },
-  { address: "B8C2\u20261n5r", label: "Under observation", launches: 6, earlyEntries: 3, pattern: "Mixed outcomes; insufficient sample for strong classification.", activity: "Quiet", evidence: ["Limited sample", "No strong coordination signal"] },
-];
+type Creator = {
+  creator: string;
+  count: number;
+  tokens: { symbol: string; mint: string; mcap: number | null }[];
+};
 
 export default function SmartWalletsPage() {
+  const [creators, setCreators] = useState<Creator[]>([]);
+  const [sample, setSample] = useState(0);
+
+  useEffect(() => {
+    fetch("/api/signals/creators")
+      .then((r) => r.json())
+      .then((d) => {
+        setCreators((d.creators || []).filter((c: Creator) => c.count >= 1));
+        setSample(d.sampleSize || 0);
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="p-5 space-y-5">
-      <div>
-        <h1 className="text-lg font-semibold">Smart wallets</h1>
-        <p className="text-[13px] text-[var(--text-muted)] mt-1 max-w-2xl">
-          A smart wallet is not simply a large balance. Classification is based on historical behavior, timing, and repeated participation \u2014 evidence, not certainty.
-        </p>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="h-title">Smart wallets</h1>
+          <p className="text-[13px] text-[var(--text-muted)] mt-1 max-w-2xl">
+            Live creator wallets from the current Pump.fun sample. Repeat launchers surface first. Activity evidence \u2014 not a proven smart-money label.
+          </p>
+        </div>
+        <span className="live-badge">LIVE SAMPLE</span>
       </div>
-      <div className="panel p-4 text-[12px] text-[var(--text-muted)]">
-        <span className="text-[var(--text)] font-medium">Definition: </span>
-        Wallet classified from historical behavior and timing \u2014 not simply its balance.
+      <div className="card p-4 text-[12px] text-[var(--text-muted)]">
+        Sample size: <span className="mono text-[var(--text)]">{sample}</span> tokens \u00b7{" "}
+        <Link href="/terminal/developers" className="text-[var(--cyan)] hover:underline">Dev reputation view</Link>
       </div>
       <div className="space-y-3">
-        {WALLETS.map((w) => (
-          <div key={w.address} className="panel p-4">
-            <div className="flex justify-between mb-3">
-              <div>
-                <div className="mono text-[14px] text-[var(--cyan)]">{w.address}</div>
-                <div className="text-[11px] text-[var(--text-dim)]">{w.label}</div>
-              </div>
-              <span className="text-[11px] text-[var(--text-muted)]">{w.activity}</span>
+        {creators.slice(0, 20).map((c) => (
+          <div key={c.creator} className="card p-4">
+            <div className="flex items-start justify-between gap-3 mb-2">
+              <a href={`https://solscan.io/account/${c.creator}`} target="_blank" rel="noreferrer" className="mono text-[13px] text-[var(--cyan)] hover:underline">
+                {c.creator.slice(0, 8)}\u2026{c.creator.slice(-6)}
+              </a>
+              <span className="badge badge-cyan">{c.count}\u00d7 launches</span>
             </div>
-            <div className="grid grid-cols-3 gap-4 text-[12px] mb-3">
-              <div><div className="text-[10px] text-[var(--text-dim)]">TRACKED LAUNCHES</div><div className="mono font-medium">{w.launches}</div></div>
-              <div><div className="text-[10px] text-[var(--text-dim)]">EARLY ENTRIES</div><div className="mono font-medium">{w.earlyEntries}</div></div>
-              <div><div className="text-[10px] text-[var(--text-dim)]">PATTERN</div><div className="text-[11px] text-[var(--text-muted)]">{w.pattern}</div></div>
+            <div className="flex flex-wrap gap-2">
+              {c.tokens.slice(0, 6).map((t) => (
+                <a key={t.mint} href={`https://pump.fun/coin/${t.mint}`} target="_blank" rel="noreferrer"
+                  className="text-[11px] border border-[var(--border)] rounded px-2 py-1 text-[var(--text-muted)] hover:text-[var(--cyan)] hover:border-[var(--cyan)]/40">
+                  {t.symbol} \u00b7 {formatUsd(t.mcap)}
+                </a>
+              ))}
             </div>
-            <ul className="flex flex-wrap gap-2">{w.evidence.map((e) => (<li key={e} className="text-[11px] border border-[var(--border)] rounded px-2 py-1 text-[var(--text-muted)]">{e}</li>))}</ul>
           </div>
         ))}
+        {creators.length === 0 && <p className="text-[13px] text-[var(--text-dim)]">Loading creator activity\u2026</p>}
       </div>
-      <p className="text-[11px] text-[var(--text-dim)]">Illustrative until full wallet graph is live. <Link href="/terminal/pumpfun" className="text-[var(--cyan)] hover:underline">Pump.fun feed</Link></p>
     </div>
   );
 }
