@@ -15,6 +15,7 @@ const NAV = [
   { href: "/terminal/developers", label: "Dev reputation", icon: "\u25C8" },
   { href: "/terminal/smart-money", label: "Smart wallets", icon: "\u25C7" },
   { href: "/terminal/investigation", label: "Investigate", icon: "\u2315" },
+  { href: "/terminal/watchlist", label: "Watchlist", icon: "\u2605" },
   { href: "/terminal/alerts", label: "Alerts", icon: "\u2691" },
   { href: "/terminal/execution", label: "Execution", icon: "\u25B7" },
   { href: "/terminal/settings", label: "Settings", icon: "\u2699" },
