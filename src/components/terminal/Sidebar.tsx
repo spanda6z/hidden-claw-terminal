@@ -12,6 +12,7 @@ const NAV = [
   { href: "/terminal/feed", label: "Live feed", icon: "\u25A3" },
   { href: "/terminal/curves", label: "Curves", icon: "\u25D0" },
   { href: "/terminal/detection", label: "Detection", icon: "\u26A1" },
+  { href: "/terminal/wallets", label: "Wallet creations", icon: "\u2B22" },
   { href: "/terminal/developers", label: "Dev reputation", icon: "\u25C8" },
   { href: "/terminal/smart-money", label: "Smart wallets", icon: "\u25C7" },
   { href: "/terminal/investigation", label: "Investigate", icon: "\u2315" },
