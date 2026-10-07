@@ -1,35 +1,46 @@
 # HIDDEN CLAW
 
-**Private Solana Intelligence Terminal**
+Solana market intelligence terminal — **intelligence first, execution optional**.
 
-> THE MARKET LEAVES FOOTPRINTS. WE FOLLOW THEM.
+## Live today
 
-High-fidelity interactive **simulation mockup**.  
-No real Solana connections. No wallets. No transactions. Demo data only.
+- Pump.fun launches, trending, curves
+- Deployer / creator wallets
+- Signal tiers (CRITICAL / HIGH / WATCH / INFO)
+- SOL price (DexScreener)
+- Local execution strategy config (no on-chain orders yet)
+- Browser watchlist
 
-## Run
+## Stack
+
+- Next.js 16 · React 19 · Tailwind 4
+- Public APIs: Pump.fun · DexScreener
+
+## Run locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open http://localhost:3000
+## Deploy (Vercel)
 
-## Flow
+1. Import `spanda6z/hidden-claw-terminal`
+2. Framework: Next.js
+3. No required env vars for core live feeds
+4. Optional later: `NEXT_PUBLIC_SOLANA_RPC`, Helius for deeper graphs
 
-```
-/ → /risk → /terms → /access → /terminal
-```
+## Paths
 
-## Terminal
+| Path | Purpose |
+|------|---------|
+| `/` | Landing + live strip |
+| `/risk` → `/terms` → `/access` | Onboarding |
+| `/terminal` | Command center |
+| `/terminal/scanner` | Live launches |
+| `/terminal/wallets` | Deployer wallets |
+| `/terminal/execution` | Strategy rules (local) |
 
-Overview · Live Feed · Launches · Smart Money · Wallets · Developers  
-Token Scanner · Social Intel · Ticker Clusters · Bonding Curves  
-Watchlist · Execution · Settings
+## Philosophy
 
-**⌘K** — Command palette
-
-## Deploy
-
-Import this repo on [Vercel](https://vercel.com/new) as a Next.js project.
+Understand the footprint. Then decide.
