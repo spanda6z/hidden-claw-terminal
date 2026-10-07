@@ -3,11 +3,7 @@ import { TopBar } from "@/components/terminal/TopBar";
 import { StatusBar } from "@/components/terminal/StatusBar";
 import { AuthGate } from "@/components/terminal/AuthGate";
 
-export default function TerminalLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function TerminalLayout({ children }: { children: React.ReactNode }) {
   return (
     <AuthGate>
       <div className="h-screen flex overflow-hidden">
@@ -23,15 +19,13 @@ export default function TerminalLayout({
               ["/terminal", "Overview"],
               ["/terminal/scanner", "Scanner"],
               ["/terminal/pumpfun", "Pump"],
-              ["/terminal/launches", "Launches"],
+              ["/terminal/wallets", "Wallets"],
               ["/terminal/alerts", "Alerts"],
-              ["/terminal/developers", "Devs"],
+              ["/terminal/execution", "Exec"],
+              ["/terminal/investigation", "Investigate"],
             ].map(([href, label]) => (
-              <a
-                key={href}
-                href={href}
-                className="shrink-0 text-[10px] tracking-wider px-2.5 py-1.5 rounded border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--cyan)] hover:border-[var(--cyan)]/40"
-              >
+              <a key={href} href={href}
+                className="shrink-0 text-[10px] tracking-wider px-2.5 py-1.5 rounded border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--cyan)] hover:border-[var(--cyan)]/40">
                 {label}
               </a>
             ))}
